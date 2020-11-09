@@ -1,0 +1,137 @@
+---
+import BaseHead from "../components/BaseHead.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import BlogPreview from "../components/BlogPreview.astro";
+import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
+import { getCollection } from "astro:content";
+import ProjectPreview from "../components/ProjectPreview.astro";
+import Hero from "../components/Hero.astro";
+
+const posts = (await getCollection("blog"))
+  .sort((a, b) => a.data.pubDate.valueOf() - b.data.pubDate.valueOf())
+  .slice(0, 3);
+
+const projects = [
+  {
+    title: "Bookclub",
+    description:
+      "An online platform where readers from all walks of life can gather to share their thoughts, engage in discussions ",
+    year: "2021",
+    sourceURL: "https://github.com/SirRender00/bookclub",
+    demoURL: "https://bookclub-web.vercel.app/",
+  },
+  {
+    title: "Portfolio Website",
+    description: "This is what you're looking at :)",
+    year: "2023",
+    sourceURL: "https://github.com/SirRender00/evynmachi.com",
+  },
+];
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+  </head>
+  <body>
+    <Header title={SITE_TITLE} />
+    <main class="main-container">
+      <Hero />
+      <section class="section-container">
+        <div class="section-heading">
+          <h3 class="title">Latest Posts</h3>
+          <a href="/blog" class="more">See More</a>
+        </div>
+        <div class="column-of-3">
+          {
+            posts.map((post) => (
+              <BlogPreview
+                title={post.data.title}
+                heroImage={post.data.heroImage}
+                slug={post.slug}
+                pubDate={post.data.pubDate}
+                body={post.body}
+                externalLink={post.data.externalLink}
+                readingTime={post.data.readingTime}
+              />
+            ))
+          }
+        </div>
+      </section>
+      <section class="section-container">
+        <div class="section-heading">
+          <h3 class="title">Projects</h3>
+          <a href="/projects" class="more">See More</a>
+        </div>
+        <div class="column-of-3">
+          {projects.map((project) => <ProjectPreview {...project} />)}
+        </div>
+      </section>
+    </main>
+    <Footer />
+    <style>
+      .main-container {
+        display: flex;
+        flex-direction: column;
+        gap: 50px;
+      }
+
+      .section-container {
+        display: flex;
+        flex-direction: column;
+        gap: 40px;
+      }
+      .section-heading {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .title {
+        font-size: 32px;
+        font-weight: 500;
+        color: #ffffff;
+      }
+
+      .more {
+        background-color: #252525;
+        color: #e6e6e6;
+        border-radius: 24px;
+        padding: 7.5px 15px;
+        border: 1px solid #2c2c2c;
+        text-decoration: none;
+      }
+
+      .more:hover {
+        border-color: #666;
+        text-decoration: none;
+      }
+
+      .column-of-3 {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+      }
+
+      :global(.light) .title {
+        color: #252525;
+      }
+
+      :global(.light) .more {
+        background-color: #f6f6f6;
+        color: #363636;
+        border-color: #ddd;
+      }
+
+      :global(.light) .more:hover {
+        border-color: #666;
+      }
+      @media (max-width: 769px) {
+        .column-of-3 {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </body>
+</html>

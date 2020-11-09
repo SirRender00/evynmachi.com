@@ -1,0 +1,57 @@
+---
+import DiscordIcon from "../assets/icons/DiscordIcon.astro";
+import EmailIcon from "../assets/icons/EmailIcon.astro";
+import FeedIcon from "../assets/icons/FeedIcon.astro";
+import GithubIcon from "../assets/icons/GithubIcon.astro";
+import LinkedIn from "../assets/icons/LinkedIn.astro";
+
+const today = new Date();
+---
+
+<footer class="footer">
+  <div class="social-links">
+    <a href="mailto:evyn.machi@gmail.com" target="_blank" class="link">
+      <EmailIcon />
+    </a>
+    <a
+      href="https://discordapp.com/users/188532755326435328"
+      target="_blank"
+      class="link"
+    >
+      <DiscordIcon />
+    </a>
+    <a href="https://github.com/SirRender00" target="_blank" class="link">
+      <GithubIcon />
+    </a>
+    <a href="https://evynmachi.com/rss.xml" target="_blank" class="link">
+      <FeedIcon />
+    </a>
+    <a href="https://www.linkedin.com/in/evyn-m-a10293117/" target="_blank" class="link">
+      <LinkedIn />
+    </a>
+  </div>
+  <p class="copy">&copy; {today.getFullYear()} Evyn Machi.</p>
+</footer>
+<style>
+  .footer {
+    padding: 25px;
+    text-align: center;
+  }
+  .social-links {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    padding: 0 25px;
+  }
+  .copy {
+    color: #fff;
+  }
+  :global(.light) .copy {
+    color: #000;
+  }
+  .icon {
+    height: 24px;
+    width: 24px;
+  }
+</style>

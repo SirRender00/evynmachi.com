@@ -1,0 +1,53 @@
+---
+import HeaderLink from "./HeaderLink.astro";
+import ThemeIcon from "./ThemeIcon.astro";
+---
+
+<header class="header">
+  <nav class="navigation">
+    <HeaderLink href="/">Home</HeaderLink>
+    <HeaderLink href="/blog">Blog</HeaderLink>
+    <HeaderLink href="/projects">Projects</HeaderLink>
+    <HeaderLink
+      href="https://eggplant-dahlia-9a8.notion.site/810c86a20d8a409da6f9114b021f8ae4?v=ceff5a68747c4a8b866428c9e6dfee93&pvs=4"
+      target="_blank"
+    >
+      WIP 🔨
+    </HeaderLink>
+  </nav>
+  <ThemeIcon />
+</header>
+<style>
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .navigation {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .navigation > a {
+    text-decoration: none;
+    color: #bbb;
+  }
+
+  .navigation > a:hover {
+    color: #fff;
+  }
+  .navigation > .active {
+    text-decoration: underline;
+    color: #ffffff;
+  }
+
+  :global(.light) .navigation > a {
+    color: #2a2a2a;
+  }
+
+  :global(.light) .navigation > a:hover {
+    color: #2a2a2a;
+  }
+</style>
