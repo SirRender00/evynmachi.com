@@ -13,7 +13,7 @@ export interface Props {
 const { title, heroImage, pubDate, slug, body, externalLink, readingTime } =
   Astro.props;
 const backgroundImage = `url(${heroImage})`;
-const url = externalLink ? externalLink : `/blog/${slug}`;
+const url = `/blog/${slug}`;
 const date = new Date(pubDate).toLocaleDateString("en-US", {
   year: "numeric",
   month: "long",
@@ -24,7 +24,7 @@ const approximateReadingTime = readingTime || getReadingTime(body);
 const isExternal = !!externalLink;
 ---
 
-<a class="link" href={url} target={isExternal ? "_blank" : "_self"}>
+<a class="link" href={url} target="_self">
   <div class="card">
     <div class="image">
       {isExternal ? <div class="overlay">External</div> : ""}

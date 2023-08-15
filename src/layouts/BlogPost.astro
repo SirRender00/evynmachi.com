@@ -11,12 +11,14 @@ import Utterances from "../components/Utterances.astro";
 
 type Props = CollectionEntry<"blog">["data"] & { body: string };
 
-const { title, description, pubDate, updatedDate, heroImage, tags, body } =
+const { title, description, pubDate, updatedDate, heroImage, tags, body, externalLink, readingTime } =
   Astro.props;
 
-const readingTime = getReadingTime(body);
+const finalReadingTime = readingTime ? readingTime : getReadingTime(body);
 const heroImageURL = `url(${heroImage})`;
 const postURL = new URL(Astro.url.pathname, Astro.site);
+const isExternal = !!externalLink;
+
 ---
 
 <html lang="en">
@@ -69,6 +71,15 @@ const postURL = new URL(Astro.url.pathname, Astro.site);
         display: flex;
         justify-content: space-between;
       }
+      .overlay {
+        position: absolute;
+        background-color: black;
+        color: white;
+        padding: 4px;
+        margin: 4px;
+        font-size: 12px;
+      }
+
       :global(.light) .title {
         color: #252525;
       }
@@ -110,13 +121,13 @@ const postURL = new URL(Astro.url.pathname, Astro.site);
                 <p class="last-updated-on">
                   Last updated on <FormattedDate date={updatedDate} />
                   <span class="dot">•</span>
-                  {readingTime} minutes to read
+                  {finalReadingTime} minutes to read
                 </p>
               ) : (
                 <p class="last-updated-on">
                   Published on <FormattedDate date={pubDate} />
                   <span class="dot">•</span>
-                  {readingTime} minutes to read
+                  {finalReadingTime} minutes to read
                 </p>
               )
             }
@@ -125,7 +136,11 @@ const postURL = new URL(Astro.url.pathname, Astro.site);
           <div class="tags-container">
             {tags.map((tag) => <div class="tag">{tag}</div>)}
           </div>
-          <div class="hero"></div>
+          <a href={externalLink} target="_blank">
+            <div class="hero">
+              {isExternal ? <div class="overlay">External</div> : ""}
+            </div>
+          </a>
         </div>
         <MarkdownWrapper>
           <slot />
