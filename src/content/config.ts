@@ -29,7 +29,7 @@ const project = defineCollection({
     description: z.string(),
     year: z
       .string()
-      .or(z.date().transform((val) => new Date(val).getFullYear)),
+      .or(z.date().transform((val) => String(new Date(val).getFullYear))),
     sourceURL: z.string().optional(),
     docsURL: z.string().optional(),
     demoURL: z.string().optional(),
