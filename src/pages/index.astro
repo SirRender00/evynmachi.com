@@ -12,21 +12,9 @@ const posts = (await getCollection("blog"))
   .sort((a, b) => a.data.pubDate.valueOf() - b.data.pubDate.valueOf())
   .slice(0, 3);
 
-const projects = [
-  {
-    title: "texasholdem",
-    description: "A pure python package for Texas Hold 'Em poker ",
-    year: "2023",
-    sourceURL: "https://github.com/SirRender00/texasholdem",
-    docsURL: "https://texasholdem.readthedocs.io",
-  },
-  {
-    title: "Portfolio Website",
-    description: "This is what you're looking at :)",
-    year: "2023",
-    sourceURL: "https://github.com/SirRender00/evynmachi.com",
-  },
-];
+const projects = (await getCollection("project"))
+  .sort((a, b) => Number(a.data.year) - Number(b.data.year))
+  .slice(0, 3);
 ---
 
 <!DOCTYPE html>
@@ -65,7 +53,19 @@ const projects = [
           <a href="/projects" class="more">See More</a>
         </div>
         <div class="column-of-3">
-          {projects.map((project) => <ProjectPreview {...project} />)}
+          {
+            projects.map((project) => 
+              <ProjectPreview 
+                title={project.data.title}
+                year={project.data.title}
+                description={project.data.description}
+                sourceURL={project.data.sourceURL}
+                demoURL={project.data.demoURL}
+                docsURL={project.data.docsURL}
+                blogURL={project.data.blogURL}
+              />
+            )
+          }
         </div>
       </section>
     </main>

@@ -1,24 +1,14 @@
 ---
+import { getCollection } from "astro:content";
 import BaseHead from "../components/BaseHead.astro";
 import Footer from "../components/Footer.astro";
 import Header from "../components/Header.astro";
 import ProjectPreview from "../components/ProjectPreview.astro";
 import { SITE_DESCRIPTION, SITE_TITLE } from "../consts";
-const projects = [
-  {
-    title: "texasholdem",
-    description: "A pure python package for Texas Hold 'Em poker ",
-    year: "2023",
-    sourceURL: "https://github.com/SirRender00/texasholdem",
-    docsURL: "https://texasholdem.readthedocs.io",
-  },
-  {
-    title: "Portfolio Website",
-    description: "This is what you're looking at :)",
-    year: "2023",
-    sourceURL: "https://github.com/SirRender00/evynmachi.com",
-  },
-];
+
+const projects = (await getCollection("project")).sort(
+  (a, b) => Number(a.data.year) - Number(b.data.year)
+);
 
 const title = `${SITE_TITLE} | Projects`;
 ---
@@ -31,7 +21,19 @@ const title = `${SITE_TITLE} | Projects`;
   <body>
     <Header />
     <main class="container">
-      {projects.map((project) => <ProjectPreview {...project} />)}
+      {
+        projects.map((project) => 
+          <ProjectPreview 
+            title={project.data.title}
+            year={project.data.title}
+            description={project.data.description}
+            sourceURL={project.data.sourceURL}
+            demoURL={project.data.demoURL}
+            docsURL={project.data.docsURL}
+            blogURL={project.data.blogURL}
+          />
+        )
+      }
     </main>
     <Footer />
     <style>
