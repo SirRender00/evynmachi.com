@@ -8,9 +8,10 @@ export interface Props {
   sourceURL: string;
   description: string;
   demoURL?: string;
+  docsURL?: string;
 }
 
-const { title, description, year, blogURL, sourceURL, demoURL } = Astro.props;
+const { title, description, year, blogURL, sourceURL, demoURL, docsURL } = Astro.props;
 ---
 
 <div class="container">
@@ -31,6 +32,14 @@ const { title, description, year, blogURL, sourceURL, demoURL } = Astro.props;
       demoURL && (
         <a href={demoURL} class="link" target="_blank">
           Demo
+          <ExternalLink />
+        </a>
+      )
+    }
+    {
+      docsURL && (
+        <a href={docsURL} class="link" target="_blank">
+          Docs
           <ExternalLink />
         </a>
       )
