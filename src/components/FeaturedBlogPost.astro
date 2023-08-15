@@ -8,8 +8,9 @@ export interface Props {
   pubDate: Date;
   body: string;
   summary: string;
+  tags?: Array<string>;
 }
-const { title, heroImage, pubDate, slug, summary, body } = Astro.props;
+const { title, heroImage, pubDate, slug, summary, body, tags } = Astro.props;
 const backgroundImage = `url(${heroImage})`;
 const url = `/blog/${slug}`;
 const date = new Date(pubDate).toLocaleDateString("en-US", {
@@ -17,6 +18,7 @@ const date = new Date(pubDate).toLocaleDateString("en-US", {
   month: "long",
   day: "numeric",
 });
+const finalTags = tags || [];
 
 const readingTime = getReadingTime(body);
 ---
@@ -31,6 +33,9 @@ const readingTime = getReadingTime(body);
         <span class="dot">•</span>{readingTime} minutes to read
       </p>
       <p>{summary}</p>
+      <div class="tags-container">
+        {finalTags.map((tag) => <div class="tag">{tag}</div>)}
+      </div>
     </div>
   </div>
 </a>
@@ -75,6 +80,17 @@ const readingTime = getReadingTime(body);
   .dot {
     margin: 0 4px;
   }
+  .tags-container {
+    display: flex;
+    gap: 6px;
+  }
+  .tag {
+    padding: 0.5px 2px;
+    border-radius: 6px;
+    border: 1px solid #2c2c2c;
+    color: #e6e6e6;
+    background-color: #252525;
+  }
   :global(.light) .container {
     background-color: #f9f9f9;
     border-color: #ddd;
@@ -84,6 +100,11 @@ const readingTime = getReadingTime(body);
   }
   :global(.light) .link {
     color: #252525;
+  }
+  :global(.light) .tag {
+    background-color: #f6f6f6;
+    color: #2c2c2c;
+    border-color: #ddd;
   }
   @media (max-width: 769px) {
     .container {

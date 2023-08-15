@@ -49,6 +49,7 @@ const title = `${SITE_TITLE} | Blog`;
               pubDate={featuredPost.data.pubDate}
               summary={featuredPost.data.summary || ""}
               heroImage={featuredPost.data.heroImage}
+              tags={featuredPost.data.tags || []}
             />
           )
         }
@@ -67,6 +68,7 @@ const title = `${SITE_TITLE} | Blog`;
                   heroImage={post.data.heroImage}
                   externalLink={post.data.externalLink}
                   readingTime={post.data.readingTime}
+                  tags={post.data.tags || []}
                 />
               ))
           }

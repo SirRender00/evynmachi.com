@@ -42,6 +42,7 @@ const projects = (await getCollection("project"))
                 body={post.body}
                 externalLink={post.data.externalLink}
                 readingTime={post.data.readingTime}
+                tags={post.data.tags || []}
               />
             ))
           }
