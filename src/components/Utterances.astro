@@ -1,17 +1,10 @@
 <div id="utterances-container"></div>
-<script>
-  const script = document.createElement("script");
-  const container = document.querySelector("#utterances-container");
-
-  Object.entries({
-    src: "https://utteranc.es/client.js",
-    repo: "SirRender00/evynmachi.com",
-    "issue-term": "pathname",
-    label: "comment",
-    theme: "github-dark",
-    crossorigin: "anonymous",
-  }).forEach(([key, value]) => {
-    script.setAttribute(key, value);
-  });
-  container?.appendChild(script);
+<script 
+  src="https://utteranc.es/client.js"
+  repo="SirRender00/evynmachi.com"
+  issue-term="pathname"
+  label="comment"
+  theme="github-light"
+  crossorigin="anonymous"
+  async>
 </script>
