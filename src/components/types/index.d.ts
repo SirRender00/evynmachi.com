@@ -6,7 +6,6 @@
  * @param _props.children - Any HTML elements. Parent element: `<div>`
  */
 export type AccordionItem = typeof import('./AccordionItem.astro').default
-export const AccordionItem: AccordionItem
 
 /**
  * Accordion parent component
@@ -17,4 +16,3 @@ export const AccordionItem: AccordionItem
  *  - WARNING: Astro cannot currently enforce the type of children in a `<slot>`
  */
 type Accordion = typeof import('./Accordion.astro').default
-export const Accordion: Accordion
