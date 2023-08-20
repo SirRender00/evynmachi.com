@@ -12,8 +12,15 @@
 	"dependencies": {
 		"@astrojs/image": "^0.15.0",
 		"@astrojs/mdx": "^0.16.0",
+		"@astrojs/react": "^2.3.2",
 		"@astrojs/rss": "^2.1.0",
 		"@astrojs/sitemap": "^1.0.1",
-		"astro": "^2.0.12"
+		"@emotion/react": "^11.11.1",
+		"@emotion/styled": "^11.11.0",
+		"astro": "^2.0.12",
+		"katex": "^0.16.8"
+	},
+	"devDependencies": {
+		"@types/katex": "^0.16.2"
 	}
 }
