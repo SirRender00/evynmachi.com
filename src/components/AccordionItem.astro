@@ -32,7 +32,7 @@ const { header } = Astro.props
   </div>
 </li>
 
-<style is:global>
+<style>
   .accordion__item,
   .accordion__header {
     width: 100%;
@@ -41,8 +41,17 @@ const { header } = Astro.props
   .accordion__header {
     display: flex;
     justify-content: space-between;
-    border: 2px solid #202020;
     padding: 1rem;
+
+    background-color: #202020;
+    border: 2px solid #e6e6e6;
+    color: #e6e6e6;
+  }
+
+  :global(.light) .accordion__header {
+    background-color: #e6e6e6;
+    border: 2px solid #202020;
+    color: #202020;
   }
 
   .accordion__item .accordion__header {
@@ -56,10 +65,20 @@ const { header } = Astro.props
 
   .accordion__item:only-of-type .accordion__header,
   .accordion__item:last-of-type .accordion__header {
+    border: 2px solid #e6e6e6;
+  }
+
+  :global(.light) .accordion__item:only-of-type .accordion__header,
+  .accordion__item:last-of-type .accordion__header {
     border: 2px solid #202020;
   }
 
   .accordion__item:only-of-type .accordion__panel,
+  .accordion__item:last-of-type .accordion__panel {
+    border-bottom: 2px solid #e6e6e6;
+  }
+
+  :global(.light) .accordion__item:only-of-type .accordion__panel,
   .accordion__item:last-of-type .accordion__panel {
     border-bottom: 2px solid #202020;
   }
@@ -72,9 +91,14 @@ const { header } = Astro.props
     visibility: hidden;
     overflow: hidden;
     height: 0;
+    border-left: 2px solid #e6e6e6;
+    border-right: 2px solid #e6e6e6;
+    transition: height 0.3s ease-in-out, visibility 0s 0.3s;
+  }
+
+  :global(.light) .accordion__panel {
     border-left: 2px solid #202020;
     border-right: 2px solid #202020;
-    transition: height 0.3s ease-in-out, visibility 0s 0.3s;
   }
 
   .panel__inner {
@@ -82,6 +106,10 @@ const { header } = Astro.props
   }
 
   .is-active .accordion__header {
+    border: 2px solid #e6e6e6;
+  }
+
+  :global(.light) .is-active .accordion__header {
     border: 2px solid #202020;
   }
 

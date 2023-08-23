@@ -6,10 +6,10 @@ const html = katex.renderToString(formula, {throwOnError: false});
 ---
 {
     inline ? (
-        <span set:html={html} class="" />
+        <span set:html={html} class="content"/>
     ) : (
         <div class="text-center">
-            <span set:html={html} class="" />
+            <span set:html={html} class="content"/>
         </div>
     )
 }
@@ -24,5 +24,11 @@ const html = katex.renderToString(formula, {throwOnError: false});
 <style>
 .text-center {
     text-align: center;
+}
+.content {
+    color: #e6e6e6;
+}
+:global(.light) .content {
+    color: #252525;
 }
 </style>
